@@ -1,4 +1,6 @@
-﻿using System;
+﻿using LiveCharts;
+using LiveCharts.Wpf;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -95,11 +97,14 @@ namespace Spring
                 Title = "Revenue",
                 LabelFormatter = value => value.ToString()
             });
+            RecalculateCharts();
         }
 
         private void RecalculateCharts()
         {
-            
+            SeriesCollection series = new SeriesCollection();
+            series.Add(new LineSeries() { Title = "dupa", Values = new ChartValues<double>(new List<double>() { 1,2,3,4 }) });
+            cartesianChart_h_t.Series = series;
         }
     }
 }
