@@ -1,7 +1,7 @@
 ﻿
 namespace Spring
 {
-    partial class Form1
+    partial class Spring
     {
         /// <summary>
         /// Required designer variable.

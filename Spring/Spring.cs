@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Spring
 {
-    public partial class Form1 : Form
+    public partial class Spring : Form
     {
-        public Form1()
+        public Spring()
         {
             InitializeComponent();
         }
