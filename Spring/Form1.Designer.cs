@@ -1,15 +1,15 @@
 ﻿
 namespace Spring
 {
-    partial class Spring
+    partial class Form1
     {
         /// <summary>
-        ///  Required designer variable.
+        /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
         /// <summary>
-        ///  Clean up any resources being used.
+        /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
@@ -24,12 +24,11 @@ namespace Spring
         #region Windows Form Designer generated code
 
         /// <summary>
-        ///  Required method for Designer support - do not modify
-        ///  the contents of this method with the code editor.
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
         {
-            this.panel1 = new System.Windows.Forms.Panel();
             this.HFunctionLabel = new System.Windows.Forms.Label();
             this.WFunctionLabel = new System.Windows.Forms.Label();
             this.HFunctionCobmoBox = new System.Windows.Forms.ComboBox();
@@ -42,7 +41,7 @@ namespace Spring
             this.ResilienceLabel = new System.Windows.Forms.Label();
             this.TenacityRateTextBox = new System.Windows.Forms.TextBox();
             this.TenacityRateLabel = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.MassTextBox = new System.Windows.Forms.TextBox();
             this.MassLabel = new System.Windows.Forms.Label();
             this.IntegrationStepTextBox = new System.Windows.Forms.TextBox();
             this.IntegrationStepLabel = new System.Windows.Forms.Label();
@@ -50,8 +49,194 @@ namespace Spring
             this.InitialSpeedLabel = new System.Windows.Forms.Label();
             this.InitialLocationTextBox = new System.Windows.Forms.TextBox();
             this.InitialLocationLabel = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.cartesianChart_f_t = new LiveCharts.WinForms.CartesianChart();
+            this.cartesianChart_g_t = new LiveCharts.WinForms.CartesianChart();
+            this.cartesianChart_h_t = new LiveCharts.WinForms.CartesianChart();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // HFunctionLabel
+            // 
+            this.HFunctionLabel.AutoSize = true;
+            this.HFunctionLabel.Location = new System.Drawing.Point(20, 431);
+            this.HFunctionLabel.Name = "HFunctionLabel";
+            this.HFunctionLabel.Size = new System.Drawing.Size(69, 13);
+            this.HFunctionLabel.TabIndex = 20;
+            this.HFunctionLabel.Text = "Function: h(t)";
+            // 
+            // WFunctionLabel
+            // 
+            this.WFunctionLabel.AutoSize = true;
+            this.WFunctionLabel.Location = new System.Drawing.Point(20, 373);
+            this.WFunctionLabel.Name = "WFunctionLabel";
+            this.WFunctionLabel.Size = new System.Drawing.Size(71, 13);
+            this.WFunctionLabel.TabIndex = 19;
+            this.WFunctionLabel.Text = "Function: w(t)";
+            // 
+            // HFunctionCobmoBox
+            // 
+            this.HFunctionCobmoBox.FormattingEnabled = true;
+            this.HFunctionCobmoBox.Items.AddRange(new object[] {
+            "A (const)",
+            "{ 0 t<0; A t>=0 }",
+            "A*sgn(sin(wt + q))",
+            "A*sin(wt + q)"});
+            this.HFunctionCobmoBox.Location = new System.Drawing.Point(20, 449);
+            this.HFunctionCobmoBox.Name = "HFunctionCobmoBox";
+            this.HFunctionCobmoBox.Size = new System.Drawing.Size(111, 21);
+            this.HFunctionCobmoBox.TabIndex = 18;
+            this.HFunctionCobmoBox.SelectedIndexChanged += new System.EventHandler(this.HFunctionCobmoBox_SelectedIndexChanged);
+            // 
+            // WFunctionCobmoBox
+            // 
+            this.WFunctionCobmoBox.FormattingEnabled = true;
+            this.WFunctionCobmoBox.Items.AddRange(new object[] {
+            "A (const)",
+            "{ 0 t<0; A t>=0 }",
+            "A*sgn(sin(wt + q))",
+            "A*sin(wt + q)"});
+            this.WFunctionCobmoBox.Location = new System.Drawing.Point(20, 391);
+            this.WFunctionCobmoBox.Name = "WFunctionCobmoBox";
+            this.WFunctionCobmoBox.Size = new System.Drawing.Size(111, 21);
+            this.WFunctionCobmoBox.TabIndex = 17;
+            this.WFunctionCobmoBox.SelectedIndexChanged += new System.EventHandler(this.WFunctionCobmoBox_SelectedIndexChanged);
+            // 
+            // A_HTextBox
+            // 
+            this.A_HTextBox.Location = new System.Drawing.Point(142, 449);
+            this.A_HTextBox.Name = "A_HTextBox";
+            this.A_HTextBox.Size = new System.Drawing.Size(29, 20);
+            this.A_HTextBox.TabIndex = 16;
+            this.A_HTextBox.TextChanged += new System.EventHandler(this.A_HTextBox_TextChanged);
+            // 
+            // AForHLabel
+            // 
+            this.AForHLabel.AutoSize = true;
+            this.AForHLabel.Location = new System.Drawing.Point(142, 431);
+            this.AForHLabel.Name = "AForHLabel";
+            this.AForHLabel.Size = new System.Drawing.Size(35, 13);
+            this.AForHLabel.TabIndex = 15;
+            this.AForHLabel.Text = "A: h(t)";
+            // 
+            // A_WTextBox
+            // 
+            this.A_WTextBox.Location = new System.Drawing.Point(142, 391);
+            this.A_WTextBox.Name = "A_WTextBox";
+            this.A_WTextBox.Size = new System.Drawing.Size(29, 20);
+            this.A_WTextBox.TabIndex = 14;
+            this.A_WTextBox.TextChanged += new System.EventHandler(this.A_WTextBox_TextChanged);
+            // 
+            // AForWLabel
+            // 
+            this.AForWLabel.AutoSize = true;
+            this.AForWLabel.Location = new System.Drawing.Point(142, 373);
+            this.AForWLabel.Name = "AForWLabel";
+            this.AForWLabel.Size = new System.Drawing.Size(37, 13);
+            this.AForWLabel.TabIndex = 13;
+            this.AForWLabel.Text = "A: w(t)";
+            // 
+            // ResilienceTextBox
+            // 
+            this.ResilienceTextBox.Location = new System.Drawing.Point(20, 309);
+            this.ResilienceTextBox.Name = "ResilienceTextBox";
+            this.ResilienceTextBox.Size = new System.Drawing.Size(151, 20);
+            this.ResilienceTextBox.TabIndex = 12;
+            this.ResilienceTextBox.TextChanged += new System.EventHandler(this.ResilienceTextBox_TextChanged);
+            // 
+            // ResilienceLabel
+            // 
+            this.ResilienceLabel.AutoSize = true;
+            this.ResilienceLabel.Location = new System.Drawing.Point(20, 291);
+            this.ResilienceLabel.Name = "ResilienceLabel";
+            this.ResilienceLabel.Size = new System.Drawing.Size(68, 13);
+            this.ResilienceLabel.TabIndex = 11;
+            this.ResilienceLabel.Text = "Resilience: c";
+            // 
+            // TenacityRateTextBox
+            // 
+            this.TenacityRateTextBox.Location = new System.Drawing.Point(20, 252);
+            this.TenacityRateTextBox.Name = "TenacityRateTextBox";
+            this.TenacityRateTextBox.Size = new System.Drawing.Size(151, 20);
+            this.TenacityRateTextBox.TabIndex = 10;
+            this.TenacityRateTextBox.TextChanged += new System.EventHandler(this.TenacityRateTextBox_TextChanged);
+            // 
+            // TenacityRateLabel
+            // 
+            this.TenacityRateLabel.AutoSize = true;
+            this.TenacityRateLabel.Location = new System.Drawing.Point(20, 234);
+            this.TenacityRateLabel.Name = "TenacityRateLabel";
+            this.TenacityRateLabel.Size = new System.Drawing.Size(86, 13);
+            this.TenacityRateLabel.TabIndex = 9;
+            this.TenacityRateLabel.Text = "Tenacity Rate: k";
+            // 
+            // MassTextBox
+            // 
+            this.MassTextBox.Location = new System.Drawing.Point(20, 196);
+            this.MassTextBox.Name = "MassTextBox";
+            this.MassTextBox.Size = new System.Drawing.Size(151, 20);
+            this.MassTextBox.TabIndex = 8;
+            this.MassTextBox.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+            // 
+            // MassLabel
+            // 
+            this.MassLabel.AutoSize = true;
+            this.MassLabel.Location = new System.Drawing.Point(20, 178);
+            this.MassLabel.Name = "MassLabel";
+            this.MassLabel.Size = new System.Drawing.Size(46, 13);
+            this.MassLabel.TabIndex = 7;
+            this.MassLabel.Text = "Mass: m";
+            // 
+            // IntegrationStepTextBox
+            // 
+            this.IntegrationStepTextBox.Location = new System.Drawing.Point(20, 144);
+            this.IntegrationStepTextBox.Name = "IntegrationStepTextBox";
+            this.IntegrationStepTextBox.Size = new System.Drawing.Size(151, 20);
+            this.IntegrationStepTextBox.TabIndex = 6;
+            this.IntegrationStepTextBox.TextChanged += new System.EventHandler(this.IntegrationStepTextBox_TextChanged);
+            // 
+            // IntegrationStepLabel
+            // 
+            this.IntegrationStepLabel.AutoSize = true;
+            this.IntegrationStepLabel.Location = new System.Drawing.Point(20, 126);
+            this.IntegrationStepLabel.Name = "IntegrationStepLabel";
+            this.IntegrationStepLabel.Size = new System.Drawing.Size(114, 13);
+            this.IntegrationStepLabel.TabIndex = 5;
+            this.IntegrationStepLabel.Text = "Integration Step (delta)";
+            // 
+            // InitialSpeedTextBox
+            // 
+            this.InitialSpeedTextBox.Location = new System.Drawing.Point(20, 91);
+            this.InitialSpeedTextBox.Name = "InitialSpeedTextBox";
+            this.InitialSpeedTextBox.Size = new System.Drawing.Size(151, 20);
+            this.InitialSpeedTextBox.TabIndex = 4;
+            this.InitialSpeedTextBox.TextChanged += new System.EventHandler(this.InitialSpeedTextBox_TextChanged);
+            // 
+            // InitialSpeedLabel
+            // 
+            this.InitialSpeedLabel.AutoSize = true;
+            this.InitialSpeedLabel.Location = new System.Drawing.Point(20, 73);
+            this.InitialSpeedLabel.Name = "InitialSpeedLabel";
+            this.InitialSpeedLabel.Size = new System.Drawing.Size(89, 13);
+            this.InitialSpeedLabel.TabIndex = 3;
+            this.InitialSpeedLabel.Text = "Initial Speed: v(0)";
+            // 
+            // InitialLocationTextBox
+            // 
+            this.InitialLocationTextBox.Location = new System.Drawing.Point(20, 38);
+            this.InitialLocationTextBox.Name = "InitialLocationTextBox";
+            this.InitialLocationTextBox.Size = new System.Drawing.Size(151, 20);
+            this.InitialLocationTextBox.TabIndex = 2;
+            this.InitialLocationTextBox.TextChanged += new System.EventHandler(this.InitialLocationTextBox_TextChanged);
+            // 
+            // InitialLocationLabel
+            // 
+            this.InitialLocationLabel.AutoSize = true;
+            this.InitialLocationLabel.Location = new System.Drawing.Point(20, 20);
+            this.InitialLocationLabel.Name = "InitialLocationLabel";
+            this.InitialLocationLabel.Size = new System.Drawing.Size(98, 13);
+            this.InitialLocationLabel.TabIndex = 1;
+            this.InitialLocationLabel.Text = "Initial Location: x(0)";
             // 
             // panel1
             // 
@@ -67,7 +252,7 @@ namespace Spring
             this.panel1.Controls.Add(this.ResilienceLabel);
             this.panel1.Controls.Add(this.TenacityRateTextBox);
             this.panel1.Controls.Add(this.TenacityRateLabel);
-            this.panel1.Controls.Add(this.textBox2);
+            this.panel1.Controls.Add(this.MassTextBox);
             this.panel1.Controls.Add(this.MassLabel);
             this.panel1.Controls.Add(this.IntegrationStepTextBox);
             this.panel1.Controls.Add(this.IntegrationStepLabel);
@@ -75,191 +260,47 @@ namespace Spring
             this.panel1.Controls.Add(this.InitialSpeedLabel);
             this.panel1.Controls.Add(this.InitialLocationTextBox);
             this.panel1.Controls.Add(this.InitialLocationLabel);
-            this.panel1.Location = new System.Drawing.Point(848, 12);
+            this.panel1.Location = new System.Drawing.Point(952, 14);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(200, 596);
             this.panel1.TabIndex = 0;
             // 
-            // HFunctionLabel
+            // cartesianChart_f_t
             // 
-            this.HFunctionLabel.AutoSize = true;
-            this.HFunctionLabel.Location = new System.Drawing.Point(20, 431);
-            this.HFunctionLabel.Name = "HFunctionLabel";
-            this.HFunctionLabel.Size = new System.Drawing.Size(79, 15);
-            this.HFunctionLabel.TabIndex = 20;
-            this.HFunctionLabel.Text = "Function: h(t)";
+            this.cartesianChart_f_t.Location = new System.Drawing.Point(12, 14);
+            this.cartesianChart_f_t.Name = "cartesianChart_f_t";
+            this.cartesianChart_f_t.Size = new System.Drawing.Size(287, 164);
+            this.cartesianChart_f_t.TabIndex = 1;
+            this.cartesianChart_f_t.Text = "cartesianChart1";
             // 
-            // WFunctionLabel
+            // cartesianChart_g_t
             // 
-            this.WFunctionLabel.AutoSize = true;
-            this.WFunctionLabel.Location = new System.Drawing.Point(20, 373);
-            this.WFunctionLabel.Name = "WFunctionLabel";
-            this.WFunctionLabel.Size = new System.Drawing.Size(81, 15);
-            this.WFunctionLabel.TabIndex = 19;
-            this.WFunctionLabel.Text = "Function: w(t)";
+            this.cartesianChart_g_t.Location = new System.Drawing.Point(323, 14);
+            this.cartesianChart_g_t.Name = "cartesianChart_g_t";
+            this.cartesianChart_g_t.Size = new System.Drawing.Size(287, 164);
+            this.cartesianChart_g_t.TabIndex = 2;
+            this.cartesianChart_g_t.Text = "cartesianChart2";
             // 
-            // HFunctionCobmoBox
+            // cartesianChart_h_t
             // 
-            this.HFunctionCobmoBox.FormattingEnabled = true;
-            this.HFunctionCobmoBox.Items.AddRange(new object[] {
-            "A (const)",
-            "{ 0 t<0; A t>=0 }",
-            "A*sgn(sin(wt + q))",
-            "A*sin(wt + q)"});
-            this.HFunctionCobmoBox.Location = new System.Drawing.Point(20, 449);
-            this.HFunctionCobmoBox.Name = "HFunctionCobmoBox";
-            this.HFunctionCobmoBox.Size = new System.Drawing.Size(111, 23);
-            this.HFunctionCobmoBox.TabIndex = 18;
+            this.cartesianChart_h_t.Location = new System.Drawing.Point(630, 14);
+            this.cartesianChart_h_t.Name = "cartesianChart_h_t";
+            this.cartesianChart_h_t.Size = new System.Drawing.Size(287, 164);
+            this.cartesianChart_h_t.TabIndex = 3;
+            this.cartesianChart_h_t.Text = "cartesianChart3";
             // 
-            // WFunctionCobmoBox
+            // Form1
             // 
-            this.WFunctionCobmoBox.FormattingEnabled = true;
-            this.WFunctionCobmoBox.Items.AddRange(new object[] {
-            "A (const)",
-            "{ 0 t<0; A t>=0 }",
-            "A*sgn(sin(wt + q))",
-            "A*sin(wt + q)"});
-            this.WFunctionCobmoBox.Location = new System.Drawing.Point(20, 391);
-            this.WFunctionCobmoBox.Name = "WFunctionCobmoBox";
-            this.WFunctionCobmoBox.Size = new System.Drawing.Size(111, 23);
-            this.WFunctionCobmoBox.TabIndex = 17;
-            // 
-            // A_HTextBox
-            // 
-            this.A_HTextBox.Location = new System.Drawing.Point(142, 449);
-            this.A_HTextBox.Name = "A_HTextBox";
-            this.A_HTextBox.Size = new System.Drawing.Size(29, 23);
-            this.A_HTextBox.TabIndex = 16;
-            // 
-            // AForHLabel
-            // 
-            this.AForHLabel.AutoSize = true;
-            this.AForHLabel.Location = new System.Drawing.Point(142, 431);
-            this.AForHLabel.Name = "AForHLabel";
-            this.AForHLabel.Size = new System.Drawing.Size(40, 15);
-            this.AForHLabel.TabIndex = 15;
-            this.AForHLabel.Text = "A: h(t)";
-            // 
-            // A_WTextBox
-            // 
-            this.A_WTextBox.Location = new System.Drawing.Point(142, 391);
-            this.A_WTextBox.Name = "A_WTextBox";
-            this.A_WTextBox.Size = new System.Drawing.Size(29, 23);
-            this.A_WTextBox.TabIndex = 14;
-            // 
-            // AForWLabel
-            // 
-            this.AForWLabel.AutoSize = true;
-            this.AForWLabel.Location = new System.Drawing.Point(142, 373);
-            this.AForWLabel.Name = "AForWLabel";
-            this.AForWLabel.Size = new System.Drawing.Size(42, 15);
-            this.AForWLabel.TabIndex = 13;
-            this.AForWLabel.Text = "A: w(t)";
-            // 
-            // ResilienceTextBox
-            // 
-            this.ResilienceTextBox.Location = new System.Drawing.Point(20, 309);
-            this.ResilienceTextBox.Name = "ResilienceTextBox";
-            this.ResilienceTextBox.Size = new System.Drawing.Size(151, 23);
-            this.ResilienceTextBox.TabIndex = 12;
-            // 
-            // ResilienceLabel
-            // 
-            this.ResilienceLabel.AutoSize = true;
-            this.ResilienceLabel.Location = new System.Drawing.Point(20, 291);
-            this.ResilienceLabel.Name = "ResilienceLabel";
-            this.ResilienceLabel.Size = new System.Drawing.Size(71, 15);
-            this.ResilienceLabel.TabIndex = 11;
-            this.ResilienceLabel.Text = "Resilience: c";
-            // 
-            // TenacityRateTextBox
-            // 
-            this.TenacityRateTextBox.Location = new System.Drawing.Point(20, 252);
-            this.TenacityRateTextBox.Name = "TenacityRateTextBox";
-            this.TenacityRateTextBox.Size = new System.Drawing.Size(151, 23);
-            this.TenacityRateTextBox.TabIndex = 10;
-            // 
-            // TenacityRateLabel
-            // 
-            this.TenacityRateLabel.AutoSize = true;
-            this.TenacityRateLabel.Location = new System.Drawing.Point(20, 234);
-            this.TenacityRateLabel.Name = "TenacityRateLabel";
-            this.TenacityRateLabel.Size = new System.Drawing.Size(88, 15);
-            this.TenacityRateLabel.TabIndex = 9;
-            this.TenacityRateLabel.Text = "Tenacity Rate: k";
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(20, 196);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(151, 23);
-            this.textBox2.TabIndex = 8;
-            // 
-            // MassLabel
-            // 
-            this.MassLabel.AutoSize = true;
-            this.MassLabel.Location = new System.Drawing.Point(20, 178);
-            this.MassLabel.Name = "MassLabel";
-            this.MassLabel.Size = new System.Drawing.Size(51, 15);
-            this.MassLabel.TabIndex = 7;
-            this.MassLabel.Text = "Mass: m";
-            // 
-            // IntegrationStepTextBox
-            // 
-            this.IntegrationStepTextBox.Location = new System.Drawing.Point(20, 144);
-            this.IntegrationStepTextBox.Name = "IntegrationStepTextBox";
-            this.IntegrationStepTextBox.Size = new System.Drawing.Size(151, 23);
-            this.IntegrationStepTextBox.TabIndex = 6;
-            // 
-            // IntegrationStepLabel
-            // 
-            this.IntegrationStepLabel.AutoSize = true;
-            this.IntegrationStepLabel.Location = new System.Drawing.Point(20, 126);
-            this.IntegrationStepLabel.Name = "IntegrationStepLabel";
-            this.IntegrationStepLabel.Size = new System.Drawing.Size(128, 15);
-            this.IntegrationStepLabel.TabIndex = 5;
-            this.IntegrationStepLabel.Text = "Integration Step (delta)";
-            // 
-            // InitialSpeedTextBox
-            // 
-            this.InitialSpeedTextBox.Location = new System.Drawing.Point(20, 91);
-            this.InitialSpeedTextBox.Name = "InitialSpeedTextBox";
-            this.InitialSpeedTextBox.Size = new System.Drawing.Size(151, 23);
-            this.InitialSpeedTextBox.TabIndex = 4;
-            // 
-            // InitialSpeedLabel
-            // 
-            this.InitialSpeedLabel.AutoSize = true;
-            this.InitialSpeedLabel.Location = new System.Drawing.Point(20, 73);
-            this.InitialSpeedLabel.Name = "InitialSpeedLabel";
-            this.InitialSpeedLabel.Size = new System.Drawing.Size(97, 15);
-            this.InitialSpeedLabel.TabIndex = 3;
-            this.InitialSpeedLabel.Text = "Initial Speed: v(0)";
-            // 
-            // InitialLocationTextBox
-            // 
-            this.InitialLocationTextBox.Location = new System.Drawing.Point(20, 38);
-            this.InitialLocationTextBox.Name = "InitialLocationTextBox";
-            this.InitialLocationTextBox.Size = new System.Drawing.Size(151, 23);
-            this.InitialLocationTextBox.TabIndex = 2;
-            // 
-            // InitialLocationLabel
-            // 
-            this.InitialLocationLabel.AutoSize = true;
-            this.InitialLocationLabel.Location = new System.Drawing.Point(20, 20);
-            this.InitialLocationLabel.Name = "InitialLocationLabel";
-            this.InitialLocationLabel.Size = new System.Drawing.Size(111, 15);
-            this.InitialLocationLabel.TabIndex = 1;
-            this.InitialLocationLabel.Text = "Initial Location: x(0)";
-            // 
-            // Spring
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1060, 620);
+            this.ClientSize = new System.Drawing.Size(1171, 622);
+            this.Controls.Add(this.cartesianChart_h_t);
+            this.Controls.Add(this.cartesianChart_g_t);
+            this.Controls.Add(this.cartesianChart_f_t);
             this.Controls.Add(this.panel1);
-            this.Name = "Spring";
+            this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
@@ -268,12 +309,11 @@ namespace Spring
 
         #endregion
 
-        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TextBox ResilienceTextBox;
         private System.Windows.Forms.Label ResilienceLabel;
         private System.Windows.Forms.TextBox TenacityRateTextBox;
         private System.Windows.Forms.Label TenacityRateLabel;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox MassTextBox;
         private System.Windows.Forms.Label MassLabel;
         private System.Windows.Forms.TextBox IntegrationStepTextBox;
         private System.Windows.Forms.Label IntegrationStepLabel;
@@ -289,6 +329,10 @@ namespace Spring
         private System.Windows.Forms.ComboBox HFunctionCobmoBox;
         private System.Windows.Forms.Label HFunctionLabel;
         private System.Windows.Forms.Label WFunctionLabel;
+        private System.Windows.Forms.Panel panel1;
+        private LiveCharts.WinForms.CartesianChart cartesianChart_f_t;
+        private LiveCharts.WinForms.CartesianChart cartesianChart_g_t;
+        private LiveCharts.WinForms.CartesianChart cartesianChart_h_t;
     }
 }
 

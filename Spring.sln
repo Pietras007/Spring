@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31624.102
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spring", "Spring\Spring.csproj", "{C2F8AF16-7A2E-41E8-A9CC-1D4FD8D44BE3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spring", "Spring\Spring.csproj", "{977E81DB-B798-4DB1-BA9F-5F0A432189D6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C2F8AF16-7A2E-41E8-A9CC-1D4FD8D44BE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C2F8AF16-7A2E-41E8-A9CC-1D4FD8D44BE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C2F8AF16-7A2E-41E8-A9CC-1D4FD8D44BE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C2F8AF16-7A2E-41E8-A9CC-1D4FD8D44BE3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{977E81DB-B798-4DB1-BA9F-5F0A432189D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{977E81DB-B798-4DB1-BA9F-5F0A432189D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{977E81DB-B798-4DB1-BA9F-5F0A432189D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{977E81DB-B798-4DB1-BA9F-5F0A432189D6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {B037474D-2C69-46F0-A3BB-51EE8787469F}
+		SolutionGuid = {68FD4343-A561-439F-B17B-FF0B4DABEDBB}
 	EndGlobalSection
 EndGlobal
