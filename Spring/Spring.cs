@@ -7,6 +7,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -86,6 +87,8 @@ namespace Spring
 
         private void InitializeCharts()
         {
+            cartesianChart_h_t.AnimationsSpeed = TimeSpan.Zero;
+            cartesianChart_h_t.AutoSize = false;
             cartesianChart_h_t.AxisX.Add(new LiveCharts.Wpf.Axis
             {
                 Title = "time",
@@ -100,11 +103,27 @@ namespace Spring
             RecalculateCharts();
         }
 
-        private void RecalculateCharts()
+        private async void RecalculateCharts()
         {
-            SeriesCollection series = new SeriesCollection();
-            series.Add(new LineSeries() { Title = "dupa", Values = new ChartValues<double>(new List<double>() { 1,2,3,4 }) });
-            cartesianChart_h_t.Series = series;
+            Random random = new Random();
+            for (int j = 0; j < 100000000000000; j++)
+            {
+
+                SeriesCollection series = new SeriesCollection();
+                List<double> seriesss = new List<double>();
+                for (int k = 0; k < 10; k++)
+                {
+                    seriesss.Add(k);
+                    seriesss.Add(random.Next(1,10));
+                }
+                series.Add(new LineSeries() { Title = "dupa", Values = new ChartValues<double>(seriesss) });
+                
+                await Task.Run(() =>
+                {
+                    Thread.Sleep(16);
+                });
+                cartesianChart_h_t.Series = series;
+            }
         }
     }
 }
