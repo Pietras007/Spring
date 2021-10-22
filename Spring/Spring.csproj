@@ -60,6 +60,7 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Functions\HWFunction.cs" />
     <Compile Include="Spring.cs">
       <SubType>Form</SubType>
     </Compile>

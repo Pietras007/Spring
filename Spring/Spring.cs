@@ -1,5 +1,6 @@
 ﻿using LiveCharts;
 using LiveCharts.Wpf;
+using Spring.Functions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,6 +16,7 @@ namespace Spring
 {
     public partial class Spring : Form
     {
+        Thread thread;
         public Spring()
         {
             InitializeComponent();
@@ -103,27 +105,71 @@ namespace Spring
             RecalculateCharts();
         }
 
-        private async void RecalculateCharts()
+        private void RecalculateCharts()
         {
-            Random random = new Random();
-            for (int j = 0; j < 100000000000000; j++)
+            if(thread != null)
             {
-
-                SeriesCollection series = new SeriesCollection();
-                List<double> seriesss = new List<double>();
-                for (int k = 0; k < 10; k++)
-                {
-                    seriesss.Add(k);
-                    seriesss.Add(random.Next(1,10));
-                }
-                series.Add(new LineSeries() { Title = "dupa", Values = new ChartValues<double>(seriesss) });
-                
-                await Task.Run(() =>
-                {
-                    Thread.Sleep(16);
-                });
-                cartesianChart_h_t.Series = series;
+                thread.Abort();
             }
+
+            Random random = new Random();
+            double time_ms = 0;
+            List<double> f_t_seriesValues = new List<double>();
+            List<double> g_t_seriesValues = new List<double>();
+            List<double> h_t_seriesValues = new List<double>();
+            List<double> h_t_seriesValues2 = new List<double>();
+            int HFunctionSelectedIndex = HFunctionCobmoBox.SelectedIndex;
+            string A_HText = A_HTextBox.Text;
+            for (int i = 0; i < 200; i++)
+            {
+                f_t_seriesValues.Add(double.MinValue);
+                g_t_seriesValues.Add(double.MinValue);
+                h_t_seriesValues.Add(double.MinValue);
+                h_t_seriesValues2.Add(0);
+            }
+
+            thread = new Thread(() =>
+            {
+                while (true)
+                {
+                    
+                    SeriesCollection f_t_series = new SeriesCollection();
+                    //List<double> f_t_seriesValues = new List<double>();
+
+                    SeriesCollection g_t_series = new SeriesCollection();
+                    //List<double> g_t_seriesValues = new List<double>();
+
+                    SeriesCollection h_t_series = new SeriesCollection();
+                    HWFunction.CountHW(HFunctionSelectedIndex, A_HText, h_t_seriesValues, h_t_seriesValues2, time_ms, 3.14, 0);
+                    foreach(var x in h_t_seriesValues2)
+                    {
+                        if(x == 0)
+                        {
+                            var z = 0;
+                        }
+                    }
+
+
+                    int timestep = 100;
+                    time_ms += timestep;
+
+                    this.Invoke((MethodInvoker)delegate
+                    {
+                        //f_t_series.Add(new LineSeries() { Title = "dupa", Values = new ChartValues<double>(f_t_seriesValues) });
+                        //g_t_series.Add(new LineSeries() { Title = "dupa", Values = new ChartValues<double>(g_t_seriesValues) });
+                        h_t_series.Add(new LineSeries() { Title = "dupa", Values = new ChartValues<double>(h_t_seriesValues2) });
+
+                        cartesianChart_f_t.Series = f_t_series;
+                        cartesianChart_g_t.Series = g_t_series;
+                        cartesianChart_h_t.Series = h_t_series;
+                    });
+                    Thread.Sleep(timestep);
+                }
+            });
+
+            thread.Start();
+
+
         }
     }
 }
