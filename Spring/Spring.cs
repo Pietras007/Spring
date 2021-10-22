@@ -32,8 +32,12 @@ namespace Spring
             this.ResilienceTextBox.Text = "1.0";
             this.WFunctionCobmoBox.SelectedIndex = 0;
             this.A_WTextBox.Text = "1.0";
+            this.w_WTextBox.Text = "1.0";
+            this.q_WTextBox.Text = "1.0";
             this.HFunctionCobmoBox.SelectedIndex = 0;
             this.A_HTextBox.Text = "1.0";
+            this.w_HTextBox.Text = "1.0";
+            this.q_HTextBox.Text = "1.0";
 
             this.InitializeCharts();
         }
@@ -90,6 +94,7 @@ namespace Spring
         private void InitializeCharts()
         {
             cartesianChart_h_t.AnimationsSpeed = TimeSpan.Zero;
+            cartesianChart_h_t.DisableAnimations = true;
             cartesianChart_h_t.AutoSize = false;
             cartesianChart_h_t.AxisX.Add(new LiveCharts.Wpf.Axis
             {
@@ -117,6 +122,9 @@ namespace Spring
             List<double> f_t_seriesValues = new List<double>();
             List<double> g_t_seriesValues = new List<double>();
             List<double> h_t_seriesValues = new List<double>();
+            List<double> w_t_seriesValues = new List<double>();
+
+            List<double> w_t_seriesValues2 = new List<double>();
             List<double> h_t_seriesValues2 = new List<double>();
             int HFunctionSelectedIndex = HFunctionCobmoBox.SelectedIndex;
             string A_HText = A_HTextBox.Text;
@@ -141,7 +149,10 @@ namespace Spring
 
                     SeriesCollection h_t_series = new SeriesCollection();
                     HWFunction.CountHW(HFunctionSelectedIndex, A_HText, h_t_seriesValues, h_t_seriesValues2, time_ms, 3.14, 0);
-                    foreach(var x in h_t_seriesValues2)
+
+                    SeriesCollection w_t_series = new SeriesCollection();
+                    //HWFunction.CountHW(HFunctionSelectedIndex, A_HText, w_t_seriesValues, w_t_seriesValues2, time_ms, 3.14, 0);
+                    foreach (var x in h_t_seriesValues2)
                     {
                         if(x == 0)
                         {
