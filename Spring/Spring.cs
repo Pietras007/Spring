@@ -36,8 +36,13 @@ namespace Spring
             this.ResilienceTextBox.Text = "1.0";
             this.WFunctionCobmoBox.SelectedIndex = 0;
             this.A_WTextBox.Text = "1.0";
+            this.w_WTextBox.Text = "1.0";
+            this.q_WTextBox.Text = "1.0";
             this.HFunctionCobmoBox.SelectedIndex = 0;
             this.A_HTextBox.Text = "1.0";
+            this.w_HTextBox.Text = "1.0";
+            this.q_HTextBox.Text = "1.0";
+
             this.InitializeCharts();
         }
 
