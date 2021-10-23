@@ -53,6 +53,7 @@ namespace Spring
             this.cartesianChart_f_t = new LiveCharts.WinForms.CartesianChart();
             this.cartesianChart_g_t = new LiveCharts.WinForms.CartesianChart();
             this.cartesianChart_h_t = new LiveCharts.WinForms.CartesianChart();
+            this.plotViewh_t = new OxyPlot.WindowsForms.PlotView();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -289,16 +290,29 @@ namespace Spring
             this.cartesianChart_h_t.TabIndex = 3;
             this.cartesianChart_h_t.Text = "cartesianChart3";
             // 
-            // Form1
+            // plotViewh_t
+            // 
+            this.plotViewh_t.Location = new System.Drawing.Point(660, 210);
+            this.plotViewh_t.Name = "plotViewh_t";
+            this.plotViewh_t.PanCursor = System.Windows.Forms.Cursors.Hand;
+            this.plotViewh_t.Size = new System.Drawing.Size(257, 203);
+            this.plotViewh_t.TabIndex = 4;
+            this.plotViewh_t.Text = "plotView1";
+            this.plotViewh_t.ZoomHorizontalCursor = System.Windows.Forms.Cursors.SizeWE;
+            this.plotViewh_t.ZoomRectangleCursor = System.Windows.Forms.Cursors.SizeNWSE;
+            this.plotViewh_t.ZoomVerticalCursor = System.Windows.Forms.Cursors.SizeNS;
+            // 
+            // Spring
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1171, 622);
+            this.Controls.Add(this.plotViewh_t);
             this.Controls.Add(this.cartesianChart_h_t);
             this.Controls.Add(this.cartesianChart_g_t);
             this.Controls.Add(this.cartesianChart_f_t);
             this.Controls.Add(this.panel1);
-            this.Name = "Form1";
+            this.Name = "Spring";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.panel1.ResumeLayout(false);
@@ -333,6 +347,7 @@ namespace Spring
         private LiveCharts.WinForms.CartesianChart cartesianChart_f_t;
         private LiveCharts.WinForms.CartesianChart cartesianChart_g_t;
         private LiveCharts.WinForms.CartesianChart cartesianChart_h_t;
+        private OxyPlot.WindowsForms.PlotView plotViewh_t;
     }
 }
 
