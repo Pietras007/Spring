@@ -50,18 +50,28 @@ namespace Spring
             this.InitialLocationTextBox = new System.Windows.Forms.TextBox();
             this.InitialLocationLabel = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.cartesianChart_f_t = new LiveCharts.WinForms.CartesianChart();
-            this.cartesianChart_g_t = new LiveCharts.WinForms.CartesianChart();
-            this.cartesianChart_h_t = new LiveCharts.WinForms.CartesianChart();
-            this.w_WTextBox = new System.Windows.Forms.TextBox();
-            this.wforWLabel = new System.Windows.Forms.Label();
-            this.q_WTextBox = new System.Windows.Forms.TextBox();
-            this.qforWLabel = new System.Windows.Forms.Label();
-            this.w_HTextBox = new System.Windows.Forms.TextBox();
-            this.wforHLabel = new System.Windows.Forms.Label();
             this.q_HTextBox = new System.Windows.Forms.TextBox();
             this.qforHLabel = new System.Windows.Forms.Label();
+            this.w_HTextBox = new System.Windows.Forms.TextBox();
+            this.wforHLabel = new System.Windows.Forms.Label();
+            this.q_WTextBox = new System.Windows.Forms.TextBox();
+            this.qforWLabel = new System.Windows.Forms.Label();
+            this.w_WTextBox = new System.Windows.Forms.TextBox();
+            this.wforWLabel = new System.Windows.Forms.Label();
+            this.plotViewf_t = new OxyPlot.WindowsForms.PlotView();
+            this.plotViewg_t = new OxyPlot.WindowsForms.PlotView();
             this.plotViewh_t = new OxyPlot.WindowsForms.PlotView();
+            this.plotVieww_t = new OxyPlot.WindowsForms.PlotView();
+            this.labelf_t = new System.Windows.Forms.Label();
+            this.labelg_t = new System.Windows.Forms.Label();
+            this.labelh_t = new System.Windows.Forms.Label();
+            this.labelw_t = new System.Windows.Forms.Label();
+            this.xtt_tLabel = new System.Windows.Forms.Label();
+            this.xt_tLabel = new System.Windows.Forms.Label();
+            this.x_tLabel = new System.Windows.Forms.Label();
+            this.plotViewxtt_t = new OxyPlot.WindowsForms.PlotView();
+            this.plotViewxt_t = new OxyPlot.WindowsForms.PlotView();
+            this.plotViewx_t = new OxyPlot.WindowsForms.PlotView();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -279,64 +289,25 @@ namespace Spring
             this.panel1.Controls.Add(this.InitialLocationLabel);
             this.panel1.Location = new System.Drawing.Point(952, 14);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(200, 596);
+            this.panel1.Size = new System.Drawing.Size(200, 707);
             this.panel1.TabIndex = 0;
             // 
-            // cartesianChart_f_t
+            // q_HTextBox
             // 
-            this.cartesianChart_f_t.Location = new System.Drawing.Point(12, 14);
-            this.cartesianChart_f_t.Name = "cartesianChart_f_t";
-            this.cartesianChart_f_t.Size = new System.Drawing.Size(287, 164);
-            this.cartesianChart_f_t.TabIndex = 1;
-            this.cartesianChart_f_t.Text = "cartesianChart1";
+            this.q_HTextBox.Location = new System.Drawing.Point(131, 542);
+            this.q_HTextBox.Name = "q_HTextBox";
+            this.q_HTextBox.Size = new System.Drawing.Size(29, 20);
+            this.q_HTextBox.TabIndex = 28;
+            this.q_HTextBox.TextChanged += new System.EventHandler(this.q_HTextBox_TextChanged);
             // 
-            // cartesianChart_g_t
+            // qforHLabel
             // 
-            this.cartesianChart_g_t.Location = new System.Drawing.Point(323, 14);
-            this.cartesianChart_g_t.Name = "cartesianChart_g_t";
-            this.cartesianChart_g_t.Size = new System.Drawing.Size(287, 164);
-            this.cartesianChart_g_t.TabIndex = 2;
-            this.cartesianChart_g_t.Text = "cartesianChart2";
-            // 
-            // cartesianChart_h_t
-            // 
-            this.cartesianChart_h_t.Location = new System.Drawing.Point(630, 14);
-            this.cartesianChart_h_t.Name = "cartesianChart_h_t";
-            this.cartesianChart_h_t.Size = new System.Drawing.Size(287, 164);
-            this.cartesianChart_h_t.TabIndex = 3;
-            this.cartesianChart_h_t.Text = "cartesianChart3";
-            // 
-            // w_WTextBox
-            // 
-            this.w_WTextBox.Location = new System.Drawing.Point(77, 433);
-            this.w_WTextBox.Name = "w_WTextBox";
-            this.w_WTextBox.Size = new System.Drawing.Size(29, 20);
-            this.w_WTextBox.TabIndex = 22;
-            // 
-            // wforWLabel
-            // 
-            this.wforWLabel.AutoSize = true;
-            this.wforWLabel.Location = new System.Drawing.Point(77, 415);
-            this.wforWLabel.Name = "wforWLabel";
-            this.wforWLabel.Size = new System.Drawing.Size(38, 13);
-            this.wforWLabel.TabIndex = 21;
-            this.wforWLabel.Text = "w: w(t)";
-            // 
-            // q_WTextBox
-            // 
-            this.q_WTextBox.Location = new System.Drawing.Point(131, 433);
-            this.q_WTextBox.Name = "q_WTextBox";
-            this.q_WTextBox.Size = new System.Drawing.Size(29, 20);
-            this.q_WTextBox.TabIndex = 24;
-            // 
-            // qforWLabel
-            // 
-            this.qforWLabel.AutoSize = true;
-            this.qforWLabel.Location = new System.Drawing.Point(131, 415);
-            this.qforWLabel.Name = "qforWLabel";
-            this.qforWLabel.Size = new System.Drawing.Size(36, 13);
-            this.qforWLabel.TabIndex = 23;
-            this.qforWLabel.Text = "q: w(t)";
+            this.qforHLabel.AutoSize = true;
+            this.qforHLabel.Location = new System.Drawing.Point(131, 524);
+            this.qforHLabel.Name = "qforHLabel";
+            this.qforHLabel.Size = new System.Drawing.Size(34, 13);
+            this.qforHLabel.TabIndex = 27;
+            this.qforHLabel.Text = "q: h(t)";
             // 
             // w_HTextBox
             // 
@@ -344,6 +315,7 @@ namespace Spring
             this.w_HTextBox.Name = "w_HTextBox";
             this.w_HTextBox.Size = new System.Drawing.Size(29, 20);
             this.w_HTextBox.TabIndex = 26;
+            this.w_HTextBox.TextChanged += new System.EventHandler(this.w_HTextBox_TextChanged);
             // 
             // wforHLabel
             // 
@@ -354,44 +326,206 @@ namespace Spring
             this.wforHLabel.TabIndex = 25;
             this.wforHLabel.Text = "w: h(t)";
             // 
-            // q_HTextBox
+            // q_WTextBox
             // 
-            this.q_HTextBox.Location = new System.Drawing.Point(131, 542);
-            this.q_HTextBox.Name = "q_HTextBox";
-            this.q_HTextBox.Size = new System.Drawing.Size(29, 20);
-            this.q_HTextBox.TabIndex = 28;
+            this.q_WTextBox.Location = new System.Drawing.Point(131, 433);
+            this.q_WTextBox.Name = "q_WTextBox";
+            this.q_WTextBox.Size = new System.Drawing.Size(29, 20);
+            this.q_WTextBox.TabIndex = 24;
+            this.q_WTextBox.TextChanged += new System.EventHandler(this.q_WTextBox_TextChanged);
             // 
-            // qforHLabel
+            // qforWLabel
             // 
-            this.qforHLabel.AutoSize = true;
-            this.qforHLabel.Location = new System.Drawing.Point(131, 524);
-            this.qforHLabel.Name = "qforHLabel";
-            this.qforHLabel.Size = new System.Drawing.Size(34, 13);
-            this.qforHLabel.TabIndex = 27;
-            this.qforHLabel.Text = "q: h(t)";
+            this.qforWLabel.AutoSize = true;
+            this.qforWLabel.Location = new System.Drawing.Point(131, 415);
+            this.qforWLabel.Name = "qforWLabel";
+            this.qforWLabel.Size = new System.Drawing.Size(36, 13);
+            this.qforWLabel.TabIndex = 23;
+            this.qforWLabel.Text = "q: w(t)";
+            // 
+            // w_WTextBox
+            // 
+            this.w_WTextBox.Location = new System.Drawing.Point(77, 433);
+            this.w_WTextBox.Name = "w_WTextBox";
+            this.w_WTextBox.Size = new System.Drawing.Size(29, 20);
+            this.w_WTextBox.TabIndex = 22;
+            this.w_WTextBox.TextChanged += new System.EventHandler(this.w_WTextBox_TextChanged);
+            // 
+            // wforWLabel
+            // 
+            this.wforWLabel.AutoSize = true;
+            this.wforWLabel.Location = new System.Drawing.Point(77, 415);
+            this.wforWLabel.Name = "wforWLabel";
+            this.wforWLabel.Size = new System.Drawing.Size(38, 13);
+            this.wforWLabel.TabIndex = 21;
+            this.wforWLabel.Text = "w: w(t)";
+            // 
+            // plotViewf_t
+            // 
+            this.plotViewf_t.Location = new System.Drawing.Point(12, 14);
+            this.plotViewf_t.Name = "plotViewf_t";
+            this.plotViewf_t.PanCursor = System.Windows.Forms.Cursors.Hand;
+            this.plotViewf_t.Size = new System.Drawing.Size(224, 203);
+            this.plotViewf_t.TabIndex = 5;
+            this.plotViewf_t.Text = "plotView1";
+            this.plotViewf_t.ZoomHorizontalCursor = System.Windows.Forms.Cursors.SizeWE;
+            this.plotViewf_t.ZoomRectangleCursor = System.Windows.Forms.Cursors.SizeNWSE;
+            this.plotViewf_t.ZoomVerticalCursor = System.Windows.Forms.Cursors.SizeNS;
+            // 
+            // plotViewg_t
+            // 
+            this.plotViewg_t.Location = new System.Drawing.Point(242, 14);
+            this.plotViewg_t.Name = "plotViewg_t";
+            this.plotViewg_t.PanCursor = System.Windows.Forms.Cursors.Hand;
+            this.plotViewg_t.Size = new System.Drawing.Size(224, 203);
+            this.plotViewg_t.TabIndex = 6;
+            this.plotViewg_t.Text = "plotView1";
+            this.plotViewg_t.ZoomHorizontalCursor = System.Windows.Forms.Cursors.SizeWE;
+            this.plotViewg_t.ZoomRectangleCursor = System.Windows.Forms.Cursors.SizeNWSE;
+            this.plotViewg_t.ZoomVerticalCursor = System.Windows.Forms.Cursors.SizeNS;
+            // 
             // plotViewh_t
             // 
-            this.plotViewh_t.Location = new System.Drawing.Point(660, 210);
+            this.plotViewh_t.Location = new System.Drawing.Point(472, 14);
             this.plotViewh_t.Name = "plotViewh_t";
             this.plotViewh_t.PanCursor = System.Windows.Forms.Cursors.Hand;
-            this.plotViewh_t.Size = new System.Drawing.Size(257, 203);
-            this.plotViewh_t.TabIndex = 4;
+            this.plotViewh_t.Size = new System.Drawing.Size(224, 203);
+            this.plotViewh_t.TabIndex = 7;
             this.plotViewh_t.Text = "plotView1";
             this.plotViewh_t.ZoomHorizontalCursor = System.Windows.Forms.Cursors.SizeWE;
             this.plotViewh_t.ZoomRectangleCursor = System.Windows.Forms.Cursors.SizeNWSE;
             this.plotViewh_t.ZoomVerticalCursor = System.Windows.Forms.Cursors.SizeNS;
             // 
-            // Spring
+            // plotVieww_t
+            // 
+            this.plotVieww_t.Location = new System.Drawing.Point(702, 14);
+            this.plotVieww_t.Name = "plotVieww_t";
+            this.plotVieww_t.PanCursor = System.Windows.Forms.Cursors.Hand;
+            this.plotVieww_t.Size = new System.Drawing.Size(224, 203);
+            this.plotVieww_t.TabIndex = 8;
+            this.plotVieww_t.Text = "plotView1";
+            this.plotVieww_t.ZoomHorizontalCursor = System.Windows.Forms.Cursors.SizeWE;
+            this.plotVieww_t.ZoomRectangleCursor = System.Windows.Forms.Cursors.SizeNWSE;
+            this.plotVieww_t.ZoomVerticalCursor = System.Windows.Forms.Cursors.SizeNS;
+            // 
+            // labelf_t
+            // 
+            this.labelf_t.AutoSize = true;
+            this.labelf_t.Location = new System.Drawing.Point(90, 9);
+            this.labelf_t.Name = "labelf_t";
+            this.labelf_t.Size = new System.Drawing.Size(35, 13);
+            this.labelf_t.TabIndex = 9;
+            this.labelf_t.Text = "label1";
+            // 
+            // labelg_t
+            // 
+            this.labelg_t.AutoSize = true;
+            this.labelg_t.Location = new System.Drawing.Point(306, 9);
+            this.labelg_t.Name = "labelg_t";
+            this.labelg_t.Size = new System.Drawing.Size(35, 13);
+            this.labelg_t.TabIndex = 10;
+            this.labelg_t.Text = "label1";
+            // 
+            // labelh_t
+            // 
+            this.labelh_t.AutoSize = true;
+            this.labelh_t.Location = new System.Drawing.Point(551, 9);
+            this.labelh_t.Name = "labelh_t";
+            this.labelh_t.Size = new System.Drawing.Size(35, 13);
+            this.labelh_t.TabIndex = 11;
+            this.labelh_t.Text = "label1";
+            // 
+            // labelw_t
+            // 
+            this.labelw_t.AutoSize = true;
+            this.labelw_t.Location = new System.Drawing.Point(800, 9);
+            this.labelw_t.Name = "labelw_t";
+            this.labelw_t.Size = new System.Drawing.Size(35, 13);
+            this.labelw_t.TabIndex = 12;
+            this.labelw_t.Text = "label1";
+            // 
+            // xtt_tLabel
+            // 
+            this.xtt_tLabel.AutoSize = true;
+            this.xtt_tLabel.Location = new System.Drawing.Point(551, 234);
+            this.xtt_tLabel.Name = "xtt_tLabel";
+            this.xtt_tLabel.Size = new System.Drawing.Size(35, 13);
+            this.xtt_tLabel.TabIndex = 18;
+            this.xtt_tLabel.Text = "label1";
+            // 
+            // xt_tLabel
+            // 
+            this.xt_tLabel.AutoSize = true;
+            this.xt_tLabel.Location = new System.Drawing.Point(306, 234);
+            this.xt_tLabel.Name = "xt_tLabel";
+            this.xt_tLabel.Size = new System.Drawing.Size(35, 13);
+            this.xt_tLabel.TabIndex = 17;
+            this.xt_tLabel.Text = "label1";
+            // 
+            // x_tLabel
+            // 
+            this.x_tLabel.AutoSize = true;
+            this.x_tLabel.Location = new System.Drawing.Point(90, 234);
+            this.x_tLabel.Name = "x_tLabel";
+            this.x_tLabel.Size = new System.Drawing.Size(35, 13);
+            this.x_tLabel.TabIndex = 16;
+            this.x_tLabel.Text = "label1";
+            // 
+            // plotViewxtt_t
+            // 
+            this.plotViewxtt_t.Location = new System.Drawing.Point(472, 239);
+            this.plotViewxtt_t.Name = "plotViewxtt_t";
+            this.plotViewxtt_t.PanCursor = System.Windows.Forms.Cursors.Hand;
+            this.plotViewxtt_t.Size = new System.Drawing.Size(224, 203);
+            this.plotViewxtt_t.TabIndex = 15;
+            this.plotViewxtt_t.Text = "plotView1";
+            this.plotViewxtt_t.ZoomHorizontalCursor = System.Windows.Forms.Cursors.SizeWE;
+            this.plotViewxtt_t.ZoomRectangleCursor = System.Windows.Forms.Cursors.SizeNWSE;
+            this.plotViewxtt_t.ZoomVerticalCursor = System.Windows.Forms.Cursors.SizeNS;
+            // 
+            // plotViewxt_t
+            // 
+            this.plotViewxt_t.Location = new System.Drawing.Point(242, 239);
+            this.plotViewxt_t.Name = "plotViewxt_t";
+            this.plotViewxt_t.PanCursor = System.Windows.Forms.Cursors.Hand;
+            this.plotViewxt_t.Size = new System.Drawing.Size(224, 203);
+            this.plotViewxt_t.TabIndex = 14;
+            this.plotViewxt_t.Text = "plotView1";
+            this.plotViewxt_t.ZoomHorizontalCursor = System.Windows.Forms.Cursors.SizeWE;
+            this.plotViewxt_t.ZoomRectangleCursor = System.Windows.Forms.Cursors.SizeNWSE;
+            this.plotViewxt_t.ZoomVerticalCursor = System.Windows.Forms.Cursors.SizeNS;
+            // 
+            // plotViewx_t
+            // 
+            this.plotViewx_t.Location = new System.Drawing.Point(12, 239);
+            this.plotViewx_t.Name = "plotViewx_t";
+            this.plotViewx_t.PanCursor = System.Windows.Forms.Cursors.Hand;
+            this.plotViewx_t.Size = new System.Drawing.Size(224, 203);
+            this.plotViewx_t.TabIndex = 13;
+            this.plotViewx_t.Text = "plotView1";
+            this.plotViewx_t.ZoomHorizontalCursor = System.Windows.Forms.Cursors.SizeWE;
+            this.plotViewx_t.ZoomRectangleCursor = System.Windows.Forms.Cursors.SizeNWSE;
+            this.plotViewx_t.ZoomVerticalCursor = System.Windows.Forms.Cursors.SizeNS;
             // 
             // Spring
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1171, 622);
+            this.ClientSize = new System.Drawing.Size(1171, 733);
+            this.Controls.Add(this.xtt_tLabel);
+            this.Controls.Add(this.xt_tLabel);
+            this.Controls.Add(this.x_tLabel);
+            this.Controls.Add(this.plotViewxtt_t);
+            this.Controls.Add(this.plotViewxt_t);
+            this.Controls.Add(this.plotViewx_t);
+            this.Controls.Add(this.labelw_t);
+            this.Controls.Add(this.labelh_t);
+            this.Controls.Add(this.labelg_t);
+            this.Controls.Add(this.labelf_t);
+            this.Controls.Add(this.plotVieww_t);
             this.Controls.Add(this.plotViewh_t);
-            this.Controls.Add(this.cartesianChart_h_t);
-            this.Controls.Add(this.cartesianChart_g_t);
-            this.Controls.Add(this.cartesianChart_f_t);
+            this.Controls.Add(this.plotViewg_t);
+            this.Controls.Add(this.plotViewf_t);
             this.Controls.Add(this.panel1);
             this.Name = "Spring";
             this.Text = "Form1";
@@ -399,6 +533,7 @@ namespace Spring
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -425,9 +560,6 @@ namespace Spring
         private System.Windows.Forms.Label HFunctionLabel;
         private System.Windows.Forms.Label WFunctionLabel;
         private System.Windows.Forms.Panel panel1;
-        private LiveCharts.WinForms.CartesianChart cartesianChart_f_t;
-        private LiveCharts.WinForms.CartesianChart cartesianChart_g_t;
-        private LiveCharts.WinForms.CartesianChart cartesianChart_h_t;
         private System.Windows.Forms.TextBox q_HTextBox;
         private System.Windows.Forms.Label qforHLabel;
         private System.Windows.Forms.TextBox w_HTextBox;
@@ -436,7 +568,20 @@ namespace Spring
         private System.Windows.Forms.Label qforWLabel;
         private System.Windows.Forms.TextBox w_WTextBox;
         private System.Windows.Forms.Label wforWLabel;
+        private OxyPlot.WindowsForms.PlotView plotViewf_t;
+        private OxyPlot.WindowsForms.PlotView plotViewg_t;
         private OxyPlot.WindowsForms.PlotView plotViewh_t;
+        private OxyPlot.WindowsForms.PlotView plotVieww_t;
+        private System.Windows.Forms.Label labelf_t;
+        private System.Windows.Forms.Label labelg_t;
+        private System.Windows.Forms.Label labelh_t;
+        private System.Windows.Forms.Label labelw_t;
+        private System.Windows.Forms.Label xtt_tLabel;
+        private System.Windows.Forms.Label xt_tLabel;
+        private System.Windows.Forms.Label x_tLabel;
+        private OxyPlot.WindowsForms.PlotView plotViewxtt_t;
+        private OxyPlot.WindowsForms.PlotView plotViewxt_t;
+        private OxyPlot.WindowsForms.PlotView plotViewx_t;
     }
 }
 
