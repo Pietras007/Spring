@@ -72,7 +72,11 @@ namespace Spring
             this.plotViewxtt_t = new OxyPlot.WindowsForms.PlotView();
             this.plotViewxt_t = new OxyPlot.WindowsForms.PlotView();
             this.plotViewx_t = new OxyPlot.WindowsForms.PlotView();
+            this.x_xtLabel = new System.Windows.Forms.Label();
+            this.plotViewx_xt = new OxyPlot.WindowsForms.PlotView();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // HFunctionLabel
@@ -507,11 +511,44 @@ namespace Spring
             this.plotViewx_t.ZoomRectangleCursor = System.Windows.Forms.Cursors.SizeNWSE;
             this.plotViewx_t.ZoomVerticalCursor = System.Windows.Forms.Cursors.SizeNS;
             // 
+            // x_xtLabel
+            // 
+            this.x_xtLabel.AutoSize = true;
+            this.x_xtLabel.Location = new System.Drawing.Point(781, 229);
+            this.x_xtLabel.Name = "x_xtLabel";
+            this.x_xtLabel.Size = new System.Drawing.Size(35, 13);
+            this.x_xtLabel.TabIndex = 20;
+            this.x_xtLabel.Text = "label1";
+            // 
+            // plotViewx_xt
+            // 
+            this.plotViewx_xt.Location = new System.Drawing.Point(702, 234);
+            this.plotViewx_xt.Name = "plotViewx_xt";
+            this.plotViewx_xt.PanCursor = System.Windows.Forms.Cursors.Hand;
+            this.plotViewx_xt.Size = new System.Drawing.Size(224, 203);
+            this.plotViewx_xt.TabIndex = 19;
+            this.plotViewx_xt.Text = "plotView1";
+            this.plotViewx_xt.ZoomHorizontalCursor = System.Windows.Forms.Cursors.SizeWE;
+            this.plotViewx_xt.ZoomRectangleCursor = System.Windows.Forms.Cursors.SizeNWSE;
+            this.plotViewx_xt.ZoomVerticalCursor = System.Windows.Forms.Cursors.SizeNS;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(25, 461);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(901, 251);
+            this.pictureBox1.TabIndex = 21;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
+            // 
             // Spring
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1171, 733);
+            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.x_xtLabel);
+            this.Controls.Add(this.plotViewx_xt);
             this.Controls.Add(this.xtt_tLabel);
             this.Controls.Add(this.xt_tLabel);
             this.Controls.Add(this.x_tLabel);
@@ -532,6 +569,7 @@ namespace Spring
             this.Load += new System.EventHandler(this.Form1_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -582,6 +620,9 @@ namespace Spring
         private OxyPlot.WindowsForms.PlotView plotViewxtt_t;
         private OxyPlot.WindowsForms.PlotView plotViewxt_t;
         private OxyPlot.WindowsForms.PlotView plotViewx_t;
+        private System.Windows.Forms.Label x_xtLabel;
+        private OxyPlot.WindowsForms.PlotView plotViewx_xt;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 

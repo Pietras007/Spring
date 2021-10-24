@@ -66,6 +66,7 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\Positions.cs" />
     <Compile Include="Functions\Class1.cs" />
     <Compile Include="Functions\Class2.cs" />
     <Compile Include="Functions\HWFunction.cs" />
