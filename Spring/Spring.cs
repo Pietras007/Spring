@@ -10,7 +10,8 @@ namespace Spring
 {
     public partial class Spring : Form
     {
-        Thread thread;
+        Thread thread, thread2;
+        System.Windows.Forms.Timer myTimer = new System.Windows.Forms.Timer();
         PlotModel f_tPlotModel = new PlotModel();
         PlotModel g_tPlotModel = new PlotModel();
         PlotModel h_tPlotModel = new PlotModel();
@@ -22,6 +23,7 @@ namespace Spring
         PlotModel x_xtPlotModel = new PlotModel();
 
         Positions positions = new Positions();
+        DataModel dataModel = new DataModel();
 
         bool started = false;
         int pointsInChart = 1000;
@@ -226,10 +228,12 @@ namespace Spring
                     var xt_tS = (OxyPlot.Series.LineSeries)xt_tPlotModel.Series[0];
                     var xtt_tS = (OxyPlot.Series.LineSeries)xtt_tPlotModel.Series[0];
                     var x_xtS = (OxyPlot.Series.LineSeries)x_xtPlotModel.Series[0];
-                    double time_ms = 0.0;
-                    if (thread != null)
+
+                    if ( thread2 != null)
                     {
-                        thread.Abort();
+                        myTimer.Stop();
+                        //thread.Abort();
+                        thread2.Abort();
                     }
 
                     f_tS.Points.Clear();
@@ -264,12 +268,14 @@ namespace Spring
                     xtt_tPlotModel.InvalidatePlot(true);
                     x_xtPlotModel.InvalidatePlot(true);
 
-                    thread = new Thread(() =>
+                    //thread = new Thread(() =>
                     {
-                        while (true)
+                        double time_s = 0.0;
+                        
+                        myTimer.Tick += new EventHandler((sender, e) =>
                         {
-                            double h_tValue = HWFunction.CountHW(HFunctionSelectedIndex, A_h, time_ms, w_h, q_h);
-                            double w_tValue = HWFunction.CountHW(WFunctionSelectedIndex, A_w, time_ms, w_w, q_w) + x0;
+                            double h_tValue = HWFunction.CountHW(HFunctionSelectedIndex, A_h, time_s, w_h, q_h);
+                            double w_tValue = HWFunction.CountHW(WFunctionSelectedIndex, A_w, time_s, w_w, q_w) + x0;
                             double f_tvalue = c * (w_tValue - xi);
                             double g_tvalue = -k * vi;
                             double xi_1 = delta * vi + xi;
@@ -278,59 +284,139 @@ namespace Spring
                             double xt_tvalue = vi;
                             double xtt_tValue = (f_tvalue + g_tvalue + h_tValue) / m; //(vi_1 - vi) / delta;
 
+                            time_s += delta;
+                            xi = xi_1;
+                            vi = vi_1;
 
-                            lock (f_tPlotModel.SyncRoot)
+                            lock (dataModel.lockObject)
                             {
-                                f_tS.Points.RemoveAt(0);
-                                f_tS.Points.Add(new DataPoint(time_ms, f_tvalue));
-                            }
-
-                            lock (g_tPlotModel.SyncRoot)
-                            {
-                                g_tS.Points.RemoveAt(0);
-                                g_tS.Points.Add(new DataPoint(time_ms, g_tvalue));
-                            }
-
-                            lock (h_tPlotModel.SyncRoot)
-                            {
-                                h_tS.Points.RemoveAt(0);
-                                h_tS.Points.Add(new DataPoint(time_ms, h_tValue));
-                            }
-
-                            lock (w_tPlotModel.SyncRoot)
-                            {
-                                w_tS.Points.RemoveAt(0);
-                                w_tS.Points.Add(new DataPoint(time_ms, w_tValue));
-                            }
-
-                            lock (x_tPlotModel.SyncRoot)
-                            {
-                                x_tS.Points.RemoveAt(0);
-                                x_tS.Points.Add(new DataPoint(time_ms, x_tvalue));
-                            }
-
-                            lock (xt_tPlotModel.SyncRoot)
-                            {
-                                xt_tS.Points.RemoveAt(0);
-                                xt_tS.Points.Add(new DataPoint(time_ms, xt_tvalue));
-                            }
-
-                            lock (xtt_tPlotModel.SyncRoot)
-                            {
-                                xtt_tS.Points.RemoveAt(0);
-                                xtt_tS.Points.Add(new DataPoint(time_ms, xtt_tValue));
-                            }
-
-                            lock (x_xtPlotModel.SyncRoot)
-                            {
-                               // x_xtS.Points.RemoveAt(0);
-                                x_xtS.Points.Add(new DataPoint(x_tvalue, xt_tvalue));
+                                dataModel.h_tValue = h_tValue;
+                                dataModel.w_tValue = w_tValue;
+                                dataModel.f_tvalue = f_tvalue;
+                                dataModel.g_tvalue = g_tvalue;
+                                dataModel.xi_1 = xi_1;
+                                dataModel.vi_1 = vi_1;
+                                dataModel.x_tvalue = x_tvalue;
+                                dataModel.xt_tvalue = xt_tvalue;
+                                dataModel.xtt_tValue = xtt_tValue;
+                                dataModel.time_s = time_s;
                             }
 
                             lock(positions.lockObject)
                             {
                                 positions.x = x_tvalue;
                                 positions.w = w_tValue - x0;
+                            }
+                        });
+                        myTimer.Interval = (int)(delta * 1000);
+                        myTimer.Start();
+
+
+
+                        //while (true)
+                        //{
+                        //    double h_tValue = HWFunction.CountHW(HFunctionSelectedIndex, A_h, time_s, w_h, q_h);
+                        //    double w_tValue = HWFunction.CountHW(WFunctionSelectedIndex, A_w, time_s, w_w, q_w) + x0;
+                        //    double f_tvalue = c * (w_tValue - xi);
+                        //    double g_tvalue = -k * vi;
+                        //    double xi_1 = delta * vi + xi;
+                        //    double vi_1 = delta * (f_tvalue + g_tvalue + h_tValue) / m + vi;
+                        //    double x_tvalue = xi;
+                        //    double xt_tvalue = vi;
+                        //    double xtt_tValue = (f_tvalue + g_tvalue + h_tValue) / m; //(vi_1 - vi) / delta;
+
+                        //    //lock (dataModel.lockObject)
+                        //    {
+                        //        dataModel.h_tValue = h_tValue;
+                        //        dataModel.w_tValue = w_tValue;
+                        //        dataModel.f_tvalue = f_tvalue;
+                        //        dataModel.g_tvalue = g_tvalue;
+                        //        dataModel.xi_1 = xi_1;
+                        //        dataModel.vi_1 = vi_1;
+                        //        dataModel.x_tvalue = x_tvalue;
+                        //        dataModel.xt_tvalue = xt_tvalue;
+                        //        dataModel.xtt_tValue = xtt_tValue;
+                        //        dataModel.time_s = time_s;
+                        //    }
+
+                        //    //lock(positions.lockObject)
+                        //    {
+                        //        positions.x = x_tvalue;
+                        //        positions.w = w_tValue - x0;
+                        //    }
+
+                        //    //Thread.Sleep(1);
+                        //    time_s += 0.001;
+                        //    xi = xi_1;
+                        //    vi = vi_1;
+                        //}
+                    }//);
+
+                    thread2 = new Thread(() =>
+                    {
+                        while (true)
+                        {
+                            double h_tValue, w_tValue, f_tvalue, g_tvalue, xi_1, vi_1, x_tvalue, xt_tvalue, xtt_tValue, TIME;
+                            lock (dataModel.lockObject)
+                            {
+                                h_tValue = dataModel.h_tValue;
+                                w_tValue = dataModel.w_tValue;
+                                f_tvalue = dataModel.f_tvalue;
+                                g_tvalue = dataModel.g_tvalue;
+                                xi_1 = dataModel.xi_1;
+                                vi_1 = dataModel.vi_1;
+                                x_tvalue = dataModel.x_tvalue;
+                                xt_tvalue = dataModel.xt_tvalue;
+                                xtt_tValue = dataModel.xtt_tValue;
+                                TIME = dataModel.time_s;
+                            }
+
+                            lock (f_tPlotModel.SyncRoot)
+                            {
+                                f_tS.Points.RemoveAt(0);
+                                f_tS.Points.Add(new DataPoint(TIME, f_tvalue));
+                            }
+
+                            lock (g_tPlotModel.SyncRoot)
+                            {
+                                g_tS.Points.RemoveAt(0);
+                                g_tS.Points.Add(new DataPoint(TIME, g_tvalue));
+                            }
+
+                            lock (h_tPlotModel.SyncRoot)
+                            {
+                                h_tS.Points.RemoveAt(0);
+                                h_tS.Points.Add(new DataPoint(TIME, h_tValue));
+                            }
+
+                            lock (w_tPlotModel.SyncRoot)
+                            {
+                                w_tS.Points.RemoveAt(0);
+                                w_tS.Points.Add(new DataPoint(TIME, w_tValue));
+                            }
+
+                            lock (x_tPlotModel.SyncRoot)
+                            {
+                                x_tS.Points.RemoveAt(0);
+                                x_tS.Points.Add(new DataPoint(TIME, x_tvalue));
+                            }
+
+                            lock (xt_tPlotModel.SyncRoot)
+                            {
+                                xt_tS.Points.RemoveAt(0);
+                                xt_tS.Points.Add(new DataPoint(TIME, xt_tvalue));
+                            }
+
+                            lock (xtt_tPlotModel.SyncRoot)
+                            {
+                                xtt_tS.Points.RemoveAt(0);
+                                xtt_tS.Points.Add(new DataPoint(TIME, xtt_tValue));
+                            }
+
+                            lock (x_xtPlotModel.SyncRoot)
+                            {
+                                // x_xtS.Points.RemoveAt(0);
+                                x_xtS.Points.Add(new DataPoint(x_tvalue, xt_tvalue));
                             }
 
                             pictureBox1.Invalidate();
@@ -344,15 +430,15 @@ namespace Spring
                             xt_tPlotModel.InvalidatePlot(true);
                             xtt_tPlotModel.InvalidatePlot(true);
                             x_xtPlotModel.InvalidatePlot(true);
-                            Thread.Sleep((int)(delta * 1000));
-                            time_ms += delta;
-                            xi = xi_1;
-                            vi = vi_1;
+                            Thread.Sleep((int)(10));
                         }
                     });
 
-                    thread.IsBackground = false;
-                    thread.Start();
+                    //thread.IsBackground = false;
+                    //thread.Start();
+
+                    thread2.IsBackground = false;
+                    thread2.Start();
                 }
                 else
                 {
