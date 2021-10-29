@@ -137,39 +137,39 @@ namespace Spring
         private void InitializeCharts()
         {
             //f(t)
-            f_tPlotModel.Axes.Add(new OxyPlot.Axes.LinearAxis { Position = OxyPlot.Axes.AxisPosition.Left, Minimum = -maxForChar, Maximum = maxForChar });
+            f_tPlotModel.Axes.Add(new OxyPlot.Axes.LinearAxis { Position = OxyPlot.Axes.AxisPosition.Left });
             f_tPlotModel.Series.Add(new OxyPlot.Series.LineSeries { LineStyle = LineStyle.Solid, Color = OxyColor.FromRgb(255, 0, 0) });
             plotViewf_t.Model = f_tPlotModel;
 
             //g(t)
-            g_tPlotModel.Axes.Add(new OxyPlot.Axes.LinearAxis { Position = OxyPlot.Axes.AxisPosition.Left, Minimum = -maxForChar, Maximum = maxForChar });
+            g_tPlotModel.Axes.Add(new OxyPlot.Axes.LinearAxis { Position = OxyPlot.Axes.AxisPosition.Left });
             g_tPlotModel.Series.Add(new OxyPlot.Series.LineSeries { LineStyle = LineStyle.Solid, Color = OxyColor.FromRgb(255, 0, 0) });
             plotViewg_t.Model = g_tPlotModel;
 
             //h(t)
-            h_tPlotModel.Axes.Add(new OxyPlot.Axes.LinearAxis { Position = OxyPlot.Axes.AxisPosition.Left, Minimum = -maxForChar, Maximum = maxForChar });
+            h_tPlotModel.Axes.Add(new OxyPlot.Axes.LinearAxis { Position = OxyPlot.Axes.AxisPosition.Left });
             h_tPlotModel.Series.Add(new OxyPlot.Series.LineSeries { LineStyle = LineStyle.Solid, Color = OxyColor.FromRgb(255, 0, 0) });
             plotViewh_t.Model = h_tPlotModel;
 
             //MainViewModel class2 = new MainViewModel();
             //plotVieww_t.Model = class2.PlotModel;
             //w(t)
-            w_tPlotModel.Axes.Add(new OxyPlot.Axes.LinearAxis { Position = OxyPlot.Axes.AxisPosition.Left, Minimum = -maxForChar, Maximum = maxForChar });
+            w_tPlotModel.Axes.Add(new OxyPlot.Axes.LinearAxis { Position = OxyPlot.Axes.AxisPosition.Left });
             w_tPlotModel.Series.Add(new OxyPlot.Series.LineSeries { LineStyle = LineStyle.Solid, Color = OxyColor.FromRgb(255, 0, 0) });
             plotVieww_t.Model = w_tPlotModel;
 
             //x(t)
-            x_tPlotModel.Axes.Add(new OxyPlot.Axes.LinearAxis { Position = OxyPlot.Axes.AxisPosition.Left, Minimum = -maxForChar, Maximum = maxForChar });
+            x_tPlotModel.Axes.Add(new OxyPlot.Axes.LinearAxis { Position = OxyPlot.Axes.AxisPosition.Left });
             x_tPlotModel.Series.Add(new OxyPlot.Series.LineSeries { LineStyle = LineStyle.Solid, Color = OxyColor.FromRgb(255, 0, 0) });
             plotViewx_t.Model = x_tPlotModel;
 
             //xt(t)
-            xt_tPlotModel.Axes.Add(new OxyPlot.Axes.LinearAxis { Position = OxyPlot.Axes.AxisPosition.Left, Minimum = -maxForChar, Maximum = maxForChar });
+            xt_tPlotModel.Axes.Add(new OxyPlot.Axes.LinearAxis { Position = OxyPlot.Axes.AxisPosition.Left });
             xt_tPlotModel.Series.Add(new OxyPlot.Series.LineSeries { LineStyle = LineStyle.Solid, Color = OxyColor.FromRgb(255, 0, 0) });
             plotViewxt_t.Model = xt_tPlotModel;
 
             //xtt(t)
-            xtt_tPlotModel.Axes.Add(new OxyPlot.Axes.LinearAxis { Position = OxyPlot.Axes.AxisPosition.Left, Minimum = -maxForChar, Maximum = maxForChar });
+            xtt_tPlotModel.Axes.Add(new OxyPlot.Axes.LinearAxis { Position = OxyPlot.Axes.AxisPosition.Left });
             xtt_tPlotModel.Series.Add(new OxyPlot.Series.LineSeries { LineStyle = LineStyle.Solid, Color = OxyColor.FromRgb(255, 0, 0) });
             plotViewxtt_t.Model = xtt_tPlotModel;
 
@@ -288,7 +288,7 @@ namespace Spring
                             nanoPrev *= 100L;
 
                             double h_tValue = HWFunction.CountHW(HFunctionSelectedIndex, A_h, time_ms, w_h, q_h);
-                            double w_tValue = HWFunction.CountHW(WFunctionSelectedIndex, A_w, time_ms, w_w, q_w) + x0;
+                            double w_tValue = HWFunction.CountHW(WFunctionSelectedIndex, A_w, time_ms, w_w, q_w);
                             double f_tvalue = c * (w_tValue - xi);
                             double g_tvalue = -k * vi;
                             double xi_1 = delta * vi + xi;
@@ -305,7 +305,7 @@ namespace Spring
                             DrawModel.xtt_tValue = xtt_tValue;
                             DrawModel.time_ms = time_ms;
                             positions.x = x_tvalue;
-                            positions.w = w_tValue - x0;
+                            positions.w = w_tValue;
                             time_ms += delta;
                             xi = xi_1;
                             vi = vi_1;
