@@ -240,6 +240,11 @@ namespace Spring
                         thread2.Abort();
                     }
 
+                    if (thread3 != null)
+                    {
+                        thread3.Abort();
+                    }
+
                     f_tS.Points.Clear();
                     g_tS.Points.Clear();
                     h_tS.Points.Clear();
@@ -260,7 +265,7 @@ namespace Spring
                         x_tS.Points.Add(new DataPoint(-i * _delta, 0));
                         xt_tS.Points.Add(new DataPoint(-i * _delta, 0));
                         xtt_tS.Points.Add(new DataPoint(-i * _delta, 0));
-                        //x_xtS.Points.Add(new DataPoint(-i * delta, 0));
+                        //x_xtS.Points.Add(new DataPoint(0, 0));
                     }
 
                     f_tPlotModel.InvalidatePlot(true);
@@ -382,7 +387,7 @@ namespace Spring
 
                                 lock (x_xtPlotModel.SyncRoot)
                                 {
-                                    // x_xtS.Points.RemoveAt(0);
+                                    //x_xtS.Points.RemoveAt(0);
                                     x_xtS.Points.Add(new DataPoint(x_tvalue, xt_tvalue));
                                 }
 
