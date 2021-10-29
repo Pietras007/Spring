@@ -2,6 +2,7 @@
 using Spring.Data;
 using Spring.Functions;
 using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
@@ -10,7 +11,7 @@ namespace Spring
 {
     public partial class Spring : Form
     {
-        Thread thread;
+        Thread thread, thread2, thread3;
         PlotModel f_tPlotModel = new PlotModel();
         PlotModel g_tPlotModel = new PlotModel();
         PlotModel h_tPlotModel = new PlotModel();
@@ -22,6 +23,7 @@ namespace Spring
         PlotModel x_xtPlotModel = new PlotModel();
 
         Positions positions = new Positions();
+        DrawModel DrawModel = new DrawModel();
 
         bool started = false;
         int pointsInChart = 1000;
@@ -199,6 +201,7 @@ namespace Spring
             string A_HText = A_HTextBox.Text;
             string w_HText = w_HTextBox.Text;
             string q_HText = q_HTextBox.Text;
+            DrawModel = new DrawModel();
             if (started)
             {
                 double x0;
@@ -232,6 +235,11 @@ namespace Spring
                         thread.Abort();
                     }
 
+                    if (thread2 != null)
+                    {
+                        thread2.Abort();
+                    }
+
                     f_tS.Points.Clear();
                     g_tS.Points.Clear();
                     h_tS.Points.Clear();
@@ -243,14 +251,15 @@ namespace Spring
                     x_xtS.Points.Clear();
                     for (int i = pointsInChart; i > 0; i--)
                     {
-                        f_tS.Points.Add(new DataPoint(-i * delta, 0));
-                        g_tS.Points.Add(new DataPoint(-i * delta, 0));
-                        h_tS.Points.Add(new DataPoint(-i * delta, 0));
-                        w_tS.Points.Add(new DataPoint(-i * delta, 0));
+                        float _delta = 0.01f;
+                        f_tS.Points.Add(new DataPoint(-i * _delta, 0));
+                        g_tS.Points.Add(new DataPoint(-i * _delta, 0));
+                        h_tS.Points.Add(new DataPoint(-i * _delta, 0));
+                        w_tS.Points.Add(new DataPoint(-i * _delta, 0));
 
-                        x_tS.Points.Add(new DataPoint(-i * delta, 0));
-                        xt_tS.Points.Add(new DataPoint(-i * delta, 0));
-                        xtt_tS.Points.Add(new DataPoint(-i * delta, 0));
+                        x_tS.Points.Add(new DataPoint(-i * _delta, 0));
+                        xt_tS.Points.Add(new DataPoint(-i * _delta, 0));
+                        xtt_tS.Points.Add(new DataPoint(-i * _delta, 0));
                         //x_xtS.Points.Add(new DataPoint(-i * delta, 0));
                     }
 
@@ -268,6 +277,11 @@ namespace Spring
                     {
                         while (true)
                         {
+                            long nanosecondsToWait = (long)(delta * 1000 * 1000 * 1000);
+                            long nanoPrev = 10000L * Stopwatch.GetTimestamp();
+                            nanoPrev /= TimeSpan.TicksPerMillisecond;
+                            nanoPrev *= 100L;
+
                             double h_tValue = HWFunction.CountHW(HFunctionSelectedIndex, A_h, time_ms, w_h, q_h);
                             double w_tValue = HWFunction.CountHW(WFunctionSelectedIndex, A_w, time_ms, w_w, q_w) + x0;
                             double f_tvalue = c * (w_tValue - xi);
@@ -276,87 +290,132 @@ namespace Spring
                             double vi_1 = delta * (f_tvalue + g_tvalue + h_tValue) / m + vi;
                             double x_tvalue = xi;
                             double xt_tvalue = vi;
-                            double xtt_tValue = (f_tvalue + g_tvalue + h_tValue) / m; //(vi_1 - vi) / delta;
+                            double xtt_tValue = (f_tvalue + g_tvalue + h_tValue) / m;
+                            DrawModel.h_tValue = h_tValue;
+                            DrawModel.w_tValue = w_tValue;
+                            DrawModel.f_tvalue = f_tvalue;
+                            DrawModel.g_tvalue = g_tvalue;
+                            DrawModel.x_tvalue = x_tvalue;
+                            DrawModel.xt_tvalue = xt_tvalue;
+                            DrawModel.xtt_tValue = xtt_tValue;
+                            DrawModel.time_ms = time_ms;
+                            positions.x = x_tvalue;
+                            positions.w = w_tValue - x0;
+                            time_ms += delta;
+                            xi = xi_1;
+                            vi = vi_1;
 
 
-                            lock (f_tPlotModel.SyncRoot)
+                            long nanoPost;
+                            while (true)
                             {
-                                f_tS.Points.RemoveAt(0);
-                                f_tS.Points.Add(new DataPoint(time_ms, f_tvalue));
+                                nanoPost = 10000L * Stopwatch.GetTimestamp();
+                                nanoPost /= TimeSpan.TicksPerMillisecond;
+                                nanoPost *= 100L;
+                                if (nanoPost - nanoPrev > nanosecondsToWait)
+                                {
+                                    break;
+                                }
                             }
+                        }
+                    });
 
-                            lock (g_tPlotModel.SyncRoot)
+                    thread.IsBackground = true;
+                    thread.Start();
+
+
+                    thread2 = new Thread(() =>
+                    {
+                        while (true)
+                        {
+                            if (DrawModel.time_ms > 0)
                             {
-                                g_tS.Points.RemoveAt(0);
-                                g_tS.Points.Add(new DataPoint(time_ms, g_tvalue));
-                            }
+                                double h_tValue = DrawModel.h_tValue;
+                                double w_tValue = DrawModel.w_tValue;
+                                double f_tvalue = DrawModel.f_tvalue;
+                                double g_tvalue = DrawModel.g_tvalue;
+                                double x_tvalue = DrawModel.x_tvalue;
+                                double xt_tvalue = DrawModel.xt_tvalue;
+                                double xtt_tValue = DrawModel.xtt_tValue;
 
-                            lock (h_tPlotModel.SyncRoot)
-                            {
-                                h_tS.Points.RemoveAt(0);
-                                h_tS.Points.Add(new DataPoint(time_ms, h_tValue));
-                            }
+                                lock (f_tPlotModel.SyncRoot)
+                                {
+                                    f_tS.Points.RemoveAt(0);
+                                    f_tS.Points.Add(new DataPoint(time_ms, f_tvalue));
+                                }
 
-                            lock (w_tPlotModel.SyncRoot)
-                            {
-                                w_tS.Points.RemoveAt(0);
-                                w_tS.Points.Add(new DataPoint(time_ms, w_tValue));
-                            }
+                                lock (g_tPlotModel.SyncRoot)
+                                {
+                                    g_tS.Points.RemoveAt(0);
+                                    g_tS.Points.Add(new DataPoint(time_ms, g_tvalue));
+                                }
 
-                            lock (x_tPlotModel.SyncRoot)
-                            {
-                                x_tS.Points.RemoveAt(0);
-                                x_tS.Points.Add(new DataPoint(time_ms, x_tvalue));
-                            }
+                                lock (h_tPlotModel.SyncRoot)
+                                {
+                                    h_tS.Points.RemoveAt(0);
+                                    h_tS.Points.Add(new DataPoint(time_ms, h_tValue));
+                                }
 
-                            lock (xt_tPlotModel.SyncRoot)
-                            {
-                                xt_tS.Points.RemoveAt(0);
-                                xt_tS.Points.Add(new DataPoint(time_ms, xt_tvalue));
-                            }
+                                lock (w_tPlotModel.SyncRoot)
+                                {
+                                    w_tS.Points.RemoveAt(0);
+                                    w_tS.Points.Add(new DataPoint(time_ms, w_tValue));
+                                }
 
-                            lock (xtt_tPlotModel.SyncRoot)
-                            {
-                                xtt_tS.Points.RemoveAt(0);
-                                xtt_tS.Points.Add(new DataPoint(time_ms, xtt_tValue));
-                            }
+                                lock (x_tPlotModel.SyncRoot)
+                                {
+                                    x_tS.Points.RemoveAt(0);
+                                    x_tS.Points.Add(new DataPoint(time_ms, x_tvalue));
+                                }
 
-                            lock (x_xtPlotModel.SyncRoot)
-                            {
-                               // x_xtS.Points.RemoveAt(0);
-                                x_xtS.Points.Add(new DataPoint(x_tvalue, xt_tvalue));
-                            }
+                                lock (xt_tPlotModel.SyncRoot)
+                                {
+                                    xt_tS.Points.RemoveAt(0);
+                                    xt_tS.Points.Add(new DataPoint(time_ms, xt_tvalue));
+                                }
 
-                            lock(positions.lockObject)
-                            {
-                                positions.x = x_tvalue;
-                                positions.w = w_tValue - x0;
-                            }
+                                lock (xtt_tPlotModel.SyncRoot)
+                                {
+                                    xtt_tS.Points.RemoveAt(0);
+                                    xtt_tS.Points.Add(new DataPoint(time_ms, xtt_tValue));
+                                }
 
+                                lock (x_xtPlotModel.SyncRoot)
+                                {
+                                    // x_xtS.Points.RemoveAt(0);
+                                    x_xtS.Points.Add(new DataPoint(x_tvalue, xt_tvalue));
+                                }
+
+                                Thread.Sleep(10);
+                            }
+                        }
+                    });
+
+                    thread2.IsBackground = true;
+                    thread2.Start();
+
+                    thread3 = new Thread(() =>
+                    {
+                        while (true)
+                        {
                             pictureBox1.Invalidate();
-
                             f_tPlotModel.InvalidatePlot(true);
                             g_tPlotModel.InvalidatePlot(true);
                             h_tPlotModel.InvalidatePlot(true);
                             w_tPlotModel.InvalidatePlot(true);
-
                             x_tPlotModel.InvalidatePlot(true);
                             xt_tPlotModel.InvalidatePlot(true);
                             xtt_tPlotModel.InvalidatePlot(true);
                             x_xtPlotModel.InvalidatePlot(true);
-                            Thread.Sleep((int)(delta * 1000));
-                            time_ms += delta;
-                            xi = xi_1;
-                            vi = vi_1;
+                            Thread.Sleep(32);
                         }
                     });
 
-                    thread.IsBackground = false;
-                    thread.Start();
+                    thread3.IsBackground = true;
+                    thread3.Start();
                 }
                 else
                 {
-
                     MessageBox.Show("NaN");
                 }
             }
@@ -379,23 +438,20 @@ namespace Spring
             int halfWidth = pictureBox1.Width / 2 + 1;
             int halfHeight = pictureBox1.Height / 2 + 1;
 
-            lock (positions.lockObject)
+            //Spring
+            using (Pen pen = new Pen(Color.Black))
             {
-                //Spring
-                using (Pen pen = new Pen(Color.Black))
-                {
-                    g.DrawLine(pen, new Point((int)positions.x + halfWidth, pictureBox1.Height / 2 + 1), new Point((int)positions.w + halfWidth, pictureBox1.Height / 2 + 1));
-                }
+                g.DrawLine(pen, new Point((int)positions.x + halfWidth, pictureBox1.Height / 2 + 1), new Point((int)positions.w + halfWidth, pictureBox1.Height / 2 + 1));
+            }
 
-                using (Pen pen = new Pen(Color.Black))
-                {
-                    g.DrawLine(pen, new Point((int)positions.w + halfWidth, pictureBox1.Height / 2 -20), new Point((int)positions.w + halfWidth, pictureBox1.Height / 2 + 20));
-                }
+            using (Pen pen = new Pen(Color.Black))
+            {
+                g.DrawLine(pen, new Point((int)positions.w + halfWidth, pictureBox1.Height / 2 - 20), new Point((int)positions.w + halfWidth, pictureBox1.Height / 2 + 20));
+            }
 
-                using (Pen pen = new Pen(Color.Black))
-                {
-                    g.DrawRectangle(pen, new Rectangle((int)positions.x + halfWidth - 5, halfHeight - 5, 11, 11));
-                }
+            using (Pen pen = new Pen(Color.Black))
+            {
+                g.DrawRectangle(pen, new Rectangle((int)positions.x + halfWidth - 5, halfHeight - 5, 11, 11));
             }
             //g.DrawLine();
         }

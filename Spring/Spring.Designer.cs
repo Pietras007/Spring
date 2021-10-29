@@ -223,9 +223,9 @@ namespace Spring
             this.IntegrationStepLabel.AutoSize = true;
             this.IntegrationStepLabel.Location = new System.Drawing.Point(20, 126);
             this.IntegrationStepLabel.Name = "IntegrationStepLabel";
-            this.IntegrationStepLabel.Size = new System.Drawing.Size(114, 13);
+            this.IntegrationStepLabel.Size = new System.Drawing.Size(139, 13);
             this.IntegrationStepLabel.TabIndex = 5;
-            this.IntegrationStepLabel.Text = "Integration Step (delta)";
+            this.IntegrationStepLabel.Text = "Step (delta) (up to: 0.00001)";
             // 
             // InitialSpeedTextBox
             // 
